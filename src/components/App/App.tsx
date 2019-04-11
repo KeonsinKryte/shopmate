@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import './_App.scss';
 import Navbar from '../Navbar/Navbar';
 import Store from '../Store/Store';
 import Filter from '../Filter/Filter';
 import storage from '../../storage/storage';
+import Product from '../Product/Product';
 
 class App extends Component {
   constructor(props: {}) {
@@ -15,17 +15,18 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
+      <Router>
+        <div className="app">
           <Navbar />
-          <div className="App__container">
-            <Filter />
+          <div className="app__container row">
+              <Route path='/' exact component={Filter}></Route>
             <Switch>
               <Route path='/' exact component={Store}></Route>
             </Switch>
           </div>
+              <Route path='/product/' component={Product}></Route>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

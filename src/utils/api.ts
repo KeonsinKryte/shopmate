@@ -1,4 +1,4 @@
-import { departmentsArray, categoriesArray, productsArray } from '../storage/storage';
+import { departmentsArray, categoriesArray, productsArray, product } from '../storage/storage';
 
 const apiRoot = 'https://backendapi.turing.com';
 const imagesRoot = 'https://backendapi.turing.com/images/products/';
@@ -33,18 +33,29 @@ function getProducts(callback: (result: productsArray) => void) {
         });
 }
 
-function getProductsById(DepartmentId: number, callback: (result: productsArray) => void) {
-    fetch(`${apiRoot}/products/inDepartment/${DepartmentId}`)
+function getProductById(productId: string | null, callback: (result: product) => void) {
+    fetch(`${apiRoot}/products/${productId}`)
         .then((rawInfo) => {
             return rawInfo.json();
         })
         .then((productsById) => {
             callback(productsById.rows);
+            console.log(productsById);
         });
 }
 
-function getProductsByCategory(CategoryId: number, callback: (result: productsArray) => void) {
-    fetch(`${apiRoot}/products/inCategory/${CategoryId}`)
+function getProductsByDepartment(departmentId: number, callback: (result: productsArray) => void) {
+    fetch(`${apiRoot}/products/inDepartment/${departmentId}`)
+        .then((rawInfo) => {
+            return rawInfo.json();
+        })
+        .then((productsByDepartment) => {
+            callback(productsByDepartment.rows);
+        });
+}
+
+function getProductsByCategory(categoryId: number, callback: (result: productsArray) => void) {
+    fetch(`${apiRoot}/products/inCategory/${categoryId}`)
         .then((rawInfo) => {
             return rawInfo.json();
         })
@@ -57,6 +68,7 @@ export default {
     getDepartments,
     getCategories,
     getProducts,
-    getProductsById,
+    getProductById,
+    getProductsByDepartment,
     getProductsByCategory
 };

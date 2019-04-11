@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import storage from '../../storage/storage';
 import DepartmentsInput from '../DepartmentsInput/DepartmentsInput';
 
+import './Filter.scss';
+
 @observer
 class Filter extends Component {
     constructor(props: {}) {
@@ -14,7 +16,7 @@ class Filter extends Component {
 
     render() {
         return (
-            <div>
+            <div className='filter col-3'>
                 <h3>{storage.departments ? 'Departments' : 'Loading Departments...'}</h3>
                 <DepartmentsInput />
 
@@ -22,12 +24,13 @@ class Filter extends Component {
                 {storage.categories && storage.categories.map((cat) => {
                     if (cat.department_id != storage.currentDepartment) return null;
                     return (
-                        <button key={cat.category_id.toString()}
+                        <button  key={cat.category_id.toString()}
                             onClick={() => {
                                 storage.setCategory(cat.category_id);
                                 storage.getProductsByCategory(cat.category_id);
                             }}
-                            style={{ background: storage.currentCategory == cat.category_id ? 'gray' : 'white' }}>
+                            className={storage.currentCategory === cat.category_id ? 'filter__button active btn btn-danger' : 'filter__button btn btn-outline-danger'}
+                            style={{ background: storage.currentCategory == cat.category_id ? '#f62f5e' : '' }}>
                             {cat.name}
                         </button>
                     );

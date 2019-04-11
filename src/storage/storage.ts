@@ -2,6 +2,8 @@ import { observable, toJS, action } from 'mobx';
 
 import api from '../utils/api';
 
+export type product = {name: string, product_id: number, description: string, price: number, discounted_price: number | null, image: string, image2: string, thumbnail: string}[];
+
 export type departmentsArray = { name: string, department_id: number }[];
 export type categoriesArray = { name: string, category_id: number, department_id: number }[];
 export type productsArray = { name: string, price: string, discounted_price: number | null, thumbnail: string, product_id: number }[];
@@ -13,11 +15,15 @@ class Storage {
 
     @observable categories: categoriesArray | null | false = null;
 
+    @observable productsFiltered: productsArray | null | false | undefined = null;
+
     @observable products: productsArray | null | false | undefined = null;
     @observable loadingProducts: boolean = false;
 
     @observable currentDepartment: number | null = null;
     @observable currentCategory: number | null = null;
+
+    @observable product: product | null = null;
 
     @action getDepartments() {
         if (this.loadingDepartments || this.departments) return;
@@ -80,11 +86,18 @@ class Storage {
         api.getProducts(callback);
     }
 
-    @action getProductsById(department_id: number) {
+    @action getProductById(product_id: string | null) {
+        var callback = (result: product) => {
+            this.product = result;
+        }
+        api.getProductById(product_id, callback);
+    }
+
+    @action getProductsByDepartment(department_id: number) {
         var callback = (result: productsArray) => {
             this.products = result;
         }
-        api.getProductsById(department_id, callback);
+        api.getProductsByDepartment(department_id, callback);
     }
 
     @action getProductsByCategory(category_id: number) {

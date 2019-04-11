@@ -1,11 +1,46 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     margin: 0;
-    .app{
+
+    .app {
         margin: 0;
     }
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #bababa;
+}
+
+h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #2e2e2e;
+    text-decoration: none;
+    margin: 25px;
+    margin-left: 0;
+}
+
+h4 {
+    font-size: 25px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    color: #f62f5e;
+    padding: 0;
 }
 
 

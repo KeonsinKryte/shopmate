@@ -1,0 +1,40 @@
+.productThumbnail{
+    height: 350px;
+    text-align: center;
+    a{
+        text-decoration: none;
+    }
+
+    &__title{
+        margin: 10px;
+    }
+    &--discounted_price{
+        .productThumbnail__price{
+            text-decoration:  line-through gray;
+            color: gray;
+            font-size: 15px;
+        }
+        .productThumbnail__price::before{
+            content: "€ ";
+        }
+        .productThumbnail__discouted_price{
+
+        }
+        .productThumbnail__discouted_price::before{
+            content: "€ ";
+        }
+    }
+
+    &__price{
+
+    }
+    &__price::before{
+        content: "€ ";
+    }
+    &__discouted_price{
+
+    }
+    &__discouted_price{
+        content: "€ ";
+    }
+}
