@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
-import './App.scss';
+import './_App.scss';
 import Navbar from '../Navbar/Navbar';
 import Store from '../Store/Store';
+import Filter from '../Filter/Filter';
+import storage from '../../storage/storage';
 
 class App extends Component {
   constructor(props: {}) {
@@ -17,16 +19,9 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <div className="App__container">
+            <Filter />
             <Switch>
-              <Route path='/' exact render={() => <div>
-                <h1>Home</h1>
-                <p>HEY! Check out the store</p>
-              </div>
-              }>
-              </Route>
-
-              <Route path='/store' exact component={Store}></Route>
-
+              <Route path='/' exact component={Store}></Route>
             </Switch>
           </div>
         </div>

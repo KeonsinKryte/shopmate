@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import SearchInput from "../SearchInput/SearchInput";
 
-import './Navbar.scss';
+import './_Navbar.scss';
 import storage from '../../storage/storage';
 
 class Navbar extends Component {

@@ -2,7 +2,7 @@ import React, { useState, Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
-import './Store.scss';
+import './_Store.scss';
 import storage from '../../storage/storage';
 import ProductThumbnail from '../Product-Thumbnail/Product-Thumbnail';
 
@@ -16,15 +16,17 @@ class Store extends Component {
 
     render() {
         return (
-            <div>
-                {storage.products && storage.products.map((products) => {
-                    return <ProductThumbnail 
-                    name={products.name} 
-                    id={products.id}
-                    discounted={products.discounted}
-                    thumbnail={`${imagesRoot}/${products.thumbnail}`}
-                    price={products.price}/>;
-                })}
+            <div className="store col-6">
+                <div className="store__container row">
+                    {storage.products && storage.products.map((products) => {
+                        return <ProductThumbnail
+                            name={products.name}
+                            product_id={products.product_id}
+                            discounted_price={products.discounted_price}
+                            thumbnail={`${imagesRoot}/${products.thumbnail}`}
+                            price={products.price} />;
+                    })}
+                </div>
             </div>
         );
     }

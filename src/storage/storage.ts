@@ -1,10 +1,10 @@
-import { observable, autorun, toJS, configure, action, computed } from 'mobx';
+import { observable, toJS, action } from 'mobx';
 
 import api from '../utils/api';
 
 export type departmentsArray = { name: string, department_id: number }[];
 export type categoriesArray = { name: string, category_id: number, department_id: number }[];
-export type productsArray = { name: string, price: string, discounted?: string, thumbnail: string, id: number }[];
+export type productsArray = { name: string, price: string, discounted_price: number | null, thumbnail: string, product_id: number }[];
 
 class Storage {
 
@@ -13,7 +13,7 @@ class Storage {
 
     @observable categories: categoriesArray | null | false = null;
 
-    @observable products: productsArray | null | false = null;
+    @observable products: productsArray | null | false | undefined = null;
     @observable loadingProducts: boolean = false;
 
     @observable currentDepartment: number | null = null;
@@ -78,6 +78,20 @@ class Storage {
             this.loadingProducts = false;
         }
         api.getProducts(callback);
+    }
+
+    @action getProductsById(department_id: number) {
+        var callback = (result: productsArray) => {
+            this.products = result;
+        }
+        api.getProductsById(department_id, callback);
+    }
+
+    @action getProductsByCategory(category_id: number) {
+        var callback = (result: productsArray) => {
+            this.products = result;
+        }
+        api.getProductsByCategory(category_id, callback);
     }
 }
 
